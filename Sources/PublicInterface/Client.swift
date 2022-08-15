@@ -17,7 +17,7 @@ public protocol ClientDelegateV2: ClientDelegate {
     func client(_ client: Client, willReconnect session: Session)
 }
 
-public class Client: WalletConnect {
+public class Client: BitizenConnect {
     public typealias RequestResponse = (Response) -> Void
 
     private(set) weak var delegate: ClientDelegate?

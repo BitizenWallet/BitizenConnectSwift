@@ -2,12 +2,12 @@
 //  Copyright © 2019 Gnosis Ltd. All rights reserved.
 //
 
-open class WalletConnect {
+open class BitizenConnect {
     var communicator = Communicator()
 
     public init() {}
 
-    public enum WalletConnectError: Error {
+    public enum BitizenConnectError: Error {
         case tryingToConnectExistingSessionURL
         case tryingToDisconnectInactiveSession
         case missingWalletInfoInSession
@@ -20,7 +20,7 @@ open class WalletConnect {
     /// - Throws: error on trying to connect to existing session url
     open func connect(to url: WCURL) throws {
         guard communicator.session(by: url) == nil else {
-            throw WalletConnectError.tryingToConnectExistingSessionURL
+            throw BitizenConnectError.tryingToConnectExistingSessionURL
         }
         listen(on: url)
     }
@@ -31,7 +31,7 @@ open class WalletConnect {
     /// - Throws: error if wallet info is missing
     open func reconnect(to session: Session) throws {
         guard session.walletInfo != nil else {
-            throw WalletConnectError.missingWalletInfoInSession
+            throw BitizenConnectError.missingWalletInfoInSession
         }
         communicator.addOrUpdateSession(session)
         listen(on: session.url)
@@ -43,7 +43,7 @@ open class WalletConnect {
     /// - Throws: error on trying to disconnect inacative sessoin.
     open func disconnect(from session: Session) throws {
         guard communicator.isConnected(by: session.url) else {
-            throw WalletConnectError.tryingToDisconnectInactiveSession
+            throw BitizenConnectError.tryingToDisconnectInactiveSession
         }
         try sendDisconnectSessionRequest(for: session)
         communicator.addOrUpdatePendingDisconnectSession(session)

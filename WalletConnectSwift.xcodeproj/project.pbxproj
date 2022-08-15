@@ -21,7 +21,7 @@
 		0A927878230BFB3F00FDCC0D /* UpdateSessionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB073422FC22F800BC18BB /* UpdateSessionHandler.swift */; };
 		0A92787A230BFB3F00FDCC0D /* WebSocketConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB073722FC22F800BC18BB /* WebSocketConnection.swift */; };
 		0A92787B230BFB3F00FDCC0D /* JSONRPC_2_0.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB073022FC22F800BC18BB /* JSONRPC_2_0.swift */; };
-		0A92787C230BFB3F00FDCC0D /* WalletConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE9CCB2302A8E600CB414D /* WalletConnect.swift */; };
+		0A92787C230BFB3F00FDCC0D /* BitizenConnect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CE9CCB2302A8E600CB414D /* BitizenConnect.swift */; };
 		0A92787D230BFB4500FDCC0D /* JSONRPC_2_0_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB075622FC231400BC18BB /* JSONRPC_2_0_Tests.swift */; };
 		0A92787E230BFB4500FDCC0D /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABB075722FC231400BC18BB /* SessionTests.swift */; };
 		0AB4B7F02317D3FD00FDEB49 /* RequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB4B7EF2317D3FD00FDEB49 /* RequestTests.swift */; };
@@ -78,7 +78,7 @@
 		5520F7C22317C11F00D58B74 /* WalletConnectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectTests.swift; sourceTree = "<group>"; };
 		5520F7C42317C1A600D58B74 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		557CA9B324C1AD05009836F0 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		55CE9CCB2302A8E600CB414D /* WalletConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnect.swift; sourceTree = "<group>"; };
+		55CE9CCB2302A8E600CB414D /* BitizenConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitizenConnect.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +174,7 @@
 		0AD7D4362316CF1B002BF84B /* PublicInterface */ = {
 			isa = PBXGroup;
 			children = (
-				55CE9CCB2302A8E600CB414D /* WalletConnect.swift */,
+				55CE9CCB2302A8E600CB414D /* BitizenConnect.swift */,
 				551B65F822FD78B700573DBD /* Client.swift */,
 				0ABB073522FC22F800BC18BB /* Server.swift */,
 				0ABB073122FC22F800BC18BB /* Session.swift */,
@@ -333,7 +333,7 @@
 				0A927876230BFB3F00FDCC0D /* Server.swift in Sources */,
 				0A92787A230BFB3F00FDCC0D /* WebSocketConnection.swift in Sources */,
 				0A927870230BFB3F00FDCC0D /* Client.swift in Sources */,
-				0A92787C230BFB3F00FDCC0D /* WalletConnect.swift in Sources */,
+				0A92787C230BFB3F00FDCC0D /* BitizenConnect.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

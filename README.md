@@ -1,87 +1,4 @@
-# WalletConnectSwift
-
-Swift SDK implementing [WalletConnect 1.x.x](https://docs.walletconnect.org) protocol for native iOS Dapps and Wallets.
-
-# Features
-
-- Server (wallet side)
-  - Create, reconnect, disconnect, and update session
-  - Flexible, extendable request handling with `Codable` support via JSON RPC 2.0
-
-- Client (native dapp side)
-  - Create, reconnect, disconnect, and update session
-  - Default implementation of [WalletConnect SDK API](https://docs.walletconnect.org/json-rpc/ethereum)
-    - `personal_sign`
-    - `eth_sign`
-    - `eth_signTypedData`
-    - `eth_sendTransaction`
-    - `eth_signTransaction`
-    - `eth_sendRawTransaction`
-  - Send custom RPC requests with `Codable` support via JSON RPC 2.0
-
-# Example Code
-Example code is in a separate repository: https://github.com/WalletConnect/WalletConnectSwift-Example
-
-- Wallet Example App:
-  - Connecting via QR code reader
-  - Connecting via deep link ("wc" scheme)
-  - Reconnecting after restart
-  - Examples of request handlers
-- Dapp Example App:
-  - Connecting via QR code reader
-  - Connecting via deep link ("wc" scheme)
-  - Reconnecting after restart
-  - Examples of request handlers
-
-## Usage in a Wallet
-
-To start connections, you need to create and retain a `Server` object to which you provide a delegate:
-
-```Swift
-let server = Server(delegate: self)
-```
-
-The library handles WalletConnect-specific session requests for you - `wc_sessionRequest` and `wc_sessionUpdate`. 
-
-To register for the important session update events, implement the delegate methods `shouldStart`, `didConnect`, `didDisconnect` and `didFailToConnect`.
-
-By default, the server cannot handle any other reqeusts - you need to provide your implementation.
-
-You do this by registering request handlers. You have the flexibility to register one handler per request method, or a catch-all request handler.
-
-
-```Swift
-server.register(handler: PersonalSignHandler(for: self, server: server, wallet: wallet))
-```
-
-Handlers are asked (in order of registration) whether they can handle each request. First handler that returns `true` from `canHandle(request:)` method will get the `handle(request:)` call. All other handlers will be skipped.
-
-In the request handler, check the incoming request's method in `canHandle` implementation, and handle actual request in the `handle(request:)` implementation.
-
-```Swift
-func canHandle(request: Request) -> Bool {
-   return request.method == "eth_signTransaction"
-}
-```
-
-You can send back response for the request through the server using `send` method:
-
-```Swift
-func handle(request: Request) {
-  // do you stuff here ...
-  
-  // error response - rejected by user
-  server.send(.reject(request))
-
-  // or send actual response - assuming the request.id exists, and MyCodableStruct type defined
-  try server.send(Response(url: request.url, value: MyCodableStruct(value: "Something"), id: request.id!))
-}
-```
-
-For more details, see the `ExampleApps/ServerApp`
-
-
-## Usage in a Dapp
+# BitizenConnectSwift
 
 To start connections, you need to create and keep alive a `Client` object to which you provide `DappInfo` and a delegate:
 
@@ -135,7 +52,7 @@ Please open `ExampleApps/ExampleApps.xcodeproj`
 - iOS 13.0 or macOS 10.14
 - Swift 5
 
-## WalletConnectSwift dependencies
+## BitizenConnectSwift dependencies
 
 - CryptoSwift - for cryptography operations
 
@@ -144,7 +61,7 @@ Please open `ExampleApps/ExampleApps.xcodeproj`
 In your `Package.swift`:
 
     dependencies: [
-        .package(url: "https://github.com/WalletConnect/WalletConnectSwift.git", .upToNextMinor(from: "1.2.0"))
+        .package(url: "https://github.com/BitizenConnect/BitizenConnectSwift.git", .upToNextMinor(from: "1.2.0"))
     ]
 
 ## CocoaPods
@@ -155,25 +72,16 @@ In your `Podfile`:
     use_frameworks!
 
     target 'MyApp' do
-      pod 'WalletConnectSwift'
+      pod 'BitizenConnectSwift', :git => 'https://github.com/BitizenConnect/BitizenConnectSwift.git', :branch => 'master'
     end
 
 ## Carthage
 
 In your `Cartfile`:
 
-    github "WalletConnect/WalletConnectSwift"
+    github "BitizenConnect/BitizenConnectSwift"
 
-Run `carthage update` to build the framework and drag the WalletConnectSwift.framework in your Xcode project.
-
-# Acknowledgments
-
-We'd like to thank [Trust Wallet](https://github.com/trustwallet/wallet-connect-swift) team for inspiration in implementing this library.
-
-# Contributors
-
-* Andrey Scherbovich ([sche](https://github.com/sche))
-* Dmitry Bespalov ([DmitryBespalov](https://github.com/DmitryBespalov))
+Run `carthage update` to build the framework and drag the BitizenConnectSwift.framework in your Xcode project.
 
 # License
 

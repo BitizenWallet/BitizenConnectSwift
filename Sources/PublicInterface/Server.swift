@@ -45,7 +45,7 @@ public protocol ServerDelegateV2: ServerDelegate {
     func server(_ server: Server, willReconnect session: Session)
 }
 
-open class Server: WalletConnect {
+open class Server: BitizenConnect {
     private let handlers: Handlers
     public private(set) weak var delegate: ServerDelegate?
 

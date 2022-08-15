@@ -6,7 +6,7 @@ import XCTest
 @testable import WalletConnectSwift
 
 class WalletConnectTests: XCTestCase {
-    var wc = WalletConnect()
+    var wc = BitizenConnect()
     let mockCommunicator = MockCommunicator()
 
     override func setUp() {

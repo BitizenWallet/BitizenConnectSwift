@@ -2,13 +2,13 @@
 import PackageDescription
 
 let package = Package(
-    name: "WalletConnectSwift",
+    name: "BitizenConnectSwift",
     platforms: [
         .macOS(.v10_14), .iOS(.v13),
     ],
     products: [
         .library(
-            name: "WalletConnectSwift",
+            name: "BitizenConnectSwift",
             targets: ["WalletConnectSwift"])
     ],
     dependencies: [
