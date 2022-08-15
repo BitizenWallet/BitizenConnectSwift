@@ -9,17 +9,17 @@ let package = Package(
     products: [
         .library(
             name: "BitizenConnectSwift",
-            targets: ["WalletConnectSwift"])
+            targets: ["BitizenConnectSwift"])
     ],
     dependencies: [
         .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", .upToNextMinor(from: "1.5.1"))
     ],
     targets: [
         .target(
-            name: "WalletConnectSwift", 
+            name: "BitizenConnectSwift", 
             dependencies: ["CryptoSwift"],
             path: "Sources"),
-        .testTarget(name: "WalletConnectSwiftTests", dependencies: ["WalletConnectSwift"], path: "Tests"),
+        .testTarget(name: "BitizenConnectSwiftTests", dependencies: ["BitizenConnectSwift"], path: "Tests"),
     ],
     swiftLanguageVersions: [.v5]
 )
