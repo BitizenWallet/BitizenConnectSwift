@@ -61,7 +61,7 @@ Please open `ExampleApps/ExampleApps.xcodeproj`
 In your `Package.swift`:
 
     dependencies: [
-        .package(url: "https://github.com/BitizenConnect/BitizenConnectSwift.git", .upToNextMinor(from: "1.2.0"))
+        .package(url: "https://github.com/BitizenWallet/BitizenConnectSwift.git", .upToNextMinor(from: "1.2.0"))
     ]
 
 ## CocoaPods
@@ -72,7 +72,7 @@ In your `Podfile`:
     use_frameworks!
 
     target 'MyApp' do
-      pod 'BitizenConnectSwift', :git => 'https://github.com/BitizenConnect/BitizenConnectSwift.git', :branch => 'master'
+      pod 'BitizenConnectSwift', :git => 'https://github.com/BitizenWallet/BitizenConnectSwift.git', :branch => 'master'
     end
 
 ## Carthage
