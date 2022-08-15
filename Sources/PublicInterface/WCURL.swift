@@ -13,7 +13,7 @@ public struct WCURL: Hashable, Codable {
 
     public var absoluteString: String {
         let bridge = bridgeURL.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
-        return "wc:\(topic)@\(version)?bridge=\(bridge)&key=\(key)"
+        return "bitizen://wallet/wc?uri=wc:\(topic)@\(version)?bridge=\(bridge)&key=\(key)"
     }
 
     public init(topic: String,
