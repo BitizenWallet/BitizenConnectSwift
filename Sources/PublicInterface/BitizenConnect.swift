@@ -4,9 +4,11 @@
 
 open class BitizenConnect {
     var communicator = Communicator()
+    
+    public static let LOGO_URI = "https://bitizen.org/sdk/assets/logo.png"
 
     public init() {}
-
+Ï
     public enum BitizenConnectError: Error {
         case tryingToConnectExistingSessionURL
         case tryingToDisconnectInactiveSession
