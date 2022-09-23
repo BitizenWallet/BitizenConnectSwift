@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import UIKit
 
 public protocol ClientDelegate: AnyObject {
     func client(_ client: Client, didFailToConnect url: WCURL)
@@ -44,15 +45,7 @@ public class Client: BitizenConnect {
     /// - Throws: Client error.
     public func send(_ request: Request, completion: RequestResponse?) throws {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIApplication.shared.open("https://bitizen.org/wallet/wc", options: [.universalLinksOnly : true]) { (success) in
-                if(!success){
-                    let vc = SFSafariViewController(url: url)
-                    self.present(vc, animated: true, completion: nil)
-                }
-                else{
-                    print("working!!")
-                }
-            }
+            UIApplication.shared.open(URL(string: "https://bitizen.org/wallet/wc")!, options: [.universalLinksOnly : true])
         }
         guard let session = communicator.session(by: request.url) else {
             throw ClientError.sessionNotFound

@@ -2,6 +2,9 @@
 //  Copyright © 2019 Gnosis Ltd. All rights reserved.
 //
 
+import UIKit
+import SafariServices
+
 open class BitizenConnect {
     var communicator = Communicator()
     
@@ -25,17 +28,6 @@ open class BitizenConnect {
             throw BitizenConnectError.tryingToConnectExistingSessionURL
         }
         listen(on: url)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIApplication.shared.open(url.absoluteString, options: [.universalLinksOnly : true]) { (success) in
-                if(!success){
-                    let vc = SFSafariViewController(url: url)
-                    self.present(vc, animated: true, completion: nil)
-                }
-                else{
-                    print("working!!")
-                }
-            }
-        }
     }
 
     /// Reconnect to the session
