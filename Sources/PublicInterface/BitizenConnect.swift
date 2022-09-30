@@ -8,7 +8,6 @@ import SafariServices
 open class BitizenConnect {
     var communicator = Communicator()
     
-    public static let LOGO_URI = "https://bitizen.org/sdk/assets/logo.png"
 
     public init() {}
 
