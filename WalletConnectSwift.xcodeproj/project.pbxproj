@@ -35,6 +35,7 @@
 		5520F7C52317C1A600D58B74 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5520F7C42317C1A600D58B74 /* Helpers.swift */; };
 		557CA9B424C1AD05009836F0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557CA9B324C1AD05009836F0 /* Logger.swift */; };
 		55B7819924A614470036F8E5 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 55B7819824A614470036F8E5 /* CryptoSwift */; };
+		C985354928E2EF9000E2361D /* BitizenConnectApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C985354828E2EF9000E2361D /* BitizenConnectApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		5520F7C42317C1A600D58B74 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		557CA9B324C1AD05009836F0 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		55CE9CCB2302A8E600CB414D /* BitizenConnect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitizenConnect.swift; sourceTree = "<group>"; };
+		C985354828E2EF9000E2361D /* BitizenConnectApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitizenConnectApi.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 				0AD7D4212316802C002BF84B /* Request.swift */,
 				0AD7D42323168033002BF84B /* Response.swift */,
 				557CA9B324C1AD05009836F0 /* Logger.swift */,
+				C985354828E2EF9000E2361D /* BitizenConnectApi.swift */,
 			);
 			path = PublicInterface;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				0AD7D428231680CE002BF84B /* Response.swift in Sources */,
 				0A92786E230BFB3F00FDCC0D /* AES_256_CBC_HMAC_SHA256_Codec.swift in Sources */,
 				0A92787B230BFB3F00FDCC0D /* JSONRPC_2_0.swift in Sources */,
+				C985354928E2EF9000E2361D /* BitizenConnectApi.swift in Sources */,
 				0AD7D427231680CE002BF84B /* Request.swift in Sources */,
 				557CA9B424C1AD05009836F0 /* Logger.swift in Sources */,
 				0A927871230BFB3F00FDCC0D /* Communicator.swift in Sources */,
