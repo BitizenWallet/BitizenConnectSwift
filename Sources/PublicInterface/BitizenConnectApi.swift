@@ -55,7 +55,7 @@ open class BitizenConnectApi: NSObject {
         }
     }
     
-    private func reconnectIfNeeded() {
+    public func reconnectIfNeeded() {
         if let oldSessionObject = UserDefaults.standard.object(forKey: sessionKey) as? Data,
             let session = try? JSONDecoder().decode(Session.self, from: oldSessionObject) {
             state = .connecting
