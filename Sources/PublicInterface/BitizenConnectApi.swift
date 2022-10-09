@@ -62,6 +62,8 @@ open class BitizenConnectApi: NSObject {
             try? client?.reconnect(to: session)
         }
     }
+    
+    var url: URL?
 
     public func connect(dappName:String,dappDescription:String,dappUrl:URL) {
         let wcUrl =  WCURL(topic: UUID().uuidString,
@@ -76,10 +78,7 @@ open class BitizenConnectApi: NSObject {
         try! client?.connect(to: wcUrl)
 
         let connectionUrl = wcUrl.absoluteString
-        let url = URL(string: connectionUrl)!;
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIApplication.shared.open(url, options: [:])
-        }
+        url = URL(string: connectionUrl)!;
     }
     
     public func personalSign(message: String,account:String,result:@escaping (_ response: Response) -> ()) {
@@ -136,12 +135,19 @@ open class BitizenConnectApi: NSObject {
 
 
 extension BitizenConnectApi: ClientDelegate {
+        
     public func client(_ client: Client, didFailToConnect url: WCURL) {
         delegate?.failedToConnect()
     }
 
     public func client(_ client: Client, didConnect url: WCURL) {
         // do nothing
+        guard let uri = self.url else {
+            return
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            UIApplication.shared.open(uri, options: [:])
+        }
     }
 
     public func client(_ client: Client, didConnect session: Session) {

@@ -43,9 +43,11 @@ public class Client: BitizenConnect {
     ///   - request: Request object.
     ///   - completion: RequestResponse completion.
     /// - Throws: Client error.
-    public func send(_ request: Request, completion: RequestResponse?) throws {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIApplication.shared.open(URL(string: "https://bitizen.org/wallet/wc")!, options: [.universalLinksOnly : true])
+    public func send(_ request: Request, completion: RequestResponse?, openWallet: Bool) throws {
+        if (openWallet) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                UIApplication.shared.open(URL(string: "https://bitizen.org/wallet/wc")!, options: [.universalLinksOnly : true])
+            }
         }
         guard let session = communicator.session(by: request.url) else {
             throw ClientError.sessionNotFound
@@ -131,7 +133,7 @@ public class Client: BitizenConnect {
                       param2: String,
                       completion: @escaping RequestResponse) throws {
         let request = try Request(url: url, method: method, params: [param1, param2])
-        try send(request, completion: completion)
+        try send(request, completion: completion, openWallet: true)
     }
 
     /// Request to send a transaction.
@@ -169,7 +171,7 @@ public class Client: BitizenConnect {
                                    transaction: Transaction,
                                    completion: @escaping RequestResponse) throws {
         let request = try Request(url: url, method: method, params: [transaction])
-        try send(request, completion: completion)
+        try send(request, completion: completion, openWallet: true)
     }
 
     /// Request to send a raw transaction. Creates new message call transaction or
@@ -185,7 +187,7 @@ public class Client: BitizenConnect {
     /// - Throws: client error.
     public func eth_sendRawTransaction(url: WCURL, data: String, completion: @escaping RequestResponse) throws {
         let request = try Request(url: url, method: "eth_sendRawTransaction", params: [data])
-        try send(request, completion: completion)
+        try send(request, completion: completion, openWallet: true)
     }
 
     override func onConnect(to url: WCURL) {
@@ -301,7 +303,7 @@ public class Client: BitizenConnect {
     override func sendDisconnectSessionRequest(for session: Session) throws {
         let dappInfo = session.dAppInfo.with(approved: false)
         let request = try Request(url: session.url, method: "wc_sessionUpdate", params: [dappInfo], id: nil)
-        try send(request, completion: nil)
+        try send(request, completion: nil, openWallet: false)
     }
 
     override func failedToConnect(_ url: WCURL) {
