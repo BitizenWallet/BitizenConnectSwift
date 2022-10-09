@@ -16,7 +16,7 @@ public protocol BitizenConnectDelegate {
 }
 
 public enum BitizenConnectState {
-    case connectint
+    case connecting
     case didConnect
     case none
 }
@@ -58,6 +58,7 @@ open class BitizenConnectApi: NSObject {
     private func reconnectIfNeeded() {
         if let oldSessionObject = UserDefaults.standard.object(forKey: sessionKey) as? Data,
             let session = try? JSONDecoder().decode(Session.self, from: oldSessionObject) {
+            state = .connecting
             client = Client(delegate: self, dAppInfo: session.dAppInfo)
             try? client?.reconnect(to: session)
         }
@@ -151,6 +152,7 @@ extension BitizenConnectApi: ClientDelegate {
     }
 
     public func client(_ client: Client, didConnect session: Session) {
+        state = .didConnect
         self.session = session
         let sessionData = try! JSONEncoder().encode(session)
         UserDefaults.standard.set(sessionData, forKey: sessionKey)
@@ -158,6 +160,7 @@ extension BitizenConnectApi: ClientDelegate {
     }
 
     public func client(_ client: Client, didDisconnect session: Session) {
+        state = .none
         UserDefaults.standard.removeObject(forKey: sessionKey)
         delegate?.didDisconnect()
     }
