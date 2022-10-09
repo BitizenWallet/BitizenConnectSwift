@@ -66,10 +66,10 @@ open class BitizenConnectApi: NSObject {
     
     var url: URL?
 
-    public func connect(dappName:String,dappDescription:String,dappUrl:URL) {
+    public func connect(dappName:String,dappDescription:String,dappUrl:URL,callbackUrl: String) {
         let wcUrl =  WCURL(topic: UUID().uuidString,
                            bridgeURL: URL(string: "https://bridge.walletconnect.org")!,//wc的中继服务器，一般不需要进行修改
-                           key: try! randomKey(), callbackUrl: "bitizenDapp://")
+                           key: try! randomKey(), callbackUrl: callbackUrl)
         let clientMeta = Session.ClientMeta(name: dappName,
                                             description: dappDescription,
                                             icons: [],

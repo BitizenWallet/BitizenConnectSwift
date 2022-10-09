@@ -1,5 +1,64 @@
 # BitizenConnectSwift
 
+## 相关配置
+    需要给您的APP配置deeplink或者Universal Links，建议您直接配置Universal Links
+## 接入
+    let api  =  BitizenConnectApi(delegate: self)
+    通过上方语句进行SDK的初始化，如果对应的SDK处于连接状态，则会进行自动连接
+
+### 相关主动发起方法
+
+* connect
+    ```
+    api.connect(dappName: "ExampleDapp", dappDescription: "BitizenConnectSwift", dappUrl: URL(string: "https://safe.gnosis.io")!)
+
+    其中
+    dappName 指的是对应dapp的名称
+    dappDescription 指的是对dapp的描述
+    dappUrl 指的是dapp对应的链接
+    ```
+* ETH sign
+    ```
+    api.ethSign(message: "0x0123", account: walletAccount) {  [weak self] response in
+                self?.handleReponse(response, expecting: "Signature")
+            }
+    ```
+* Personal Sign
+    ```
+              api.personalSign(message: "Hi there!", account: walletAccount) {  [weak self] response in
+                self?.handleReponse(response, expecting: "Signature")
+            }
+    ```
+* Sign typed date
+    ```
+    api.ethSignTypedData(message: Stub.typedData, account: walletAccount) {  [weak self] response in
+                self?.handleReponse(response, expecting: "Signature")
+            }
+    ```
+* ETH send transaction
+    ```
+    api.ethSendTransaction(transaction: transaction) {  [weak self] response in
+                self?.handleReponse(response, expecting: "Hash")
+            }
+    注意：这里的nonce直接传“0”就可以，APP端会根据重新获取所应该的nonce值
+    ```
+* Disconnect
+    ```
+    api.disconnect()
+    ```
+
+## 代理方法回调
+    
+    public protocol BitizenConnectDelegate {
+        func failedToConnect() // websocket 断开链接
+        func didConnect(chainId: Int?,accounts: [String]?) // 成功选择链接钱包
+        func didDisconnect() // 断开链接
+    }
+    
+    
+---
+
+
 To start connections, you need to create and keep alive a `Client` object to which you provide `DappInfo` and a delegate:
 
 ```Swift
