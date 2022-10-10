@@ -10,7 +10,18 @@ let api  =  BitizenConnectApi(delegate: self)
 ```
 通过上方语句进行SDK的初始化，如果对应的SDK处于连接状态，则会进行自动连接
 
-### 相关主动发起方法
+### 代理方法回调
+    
+```Swift    
+    public protocol BitizenConnectDelegate {
+        func failedToConnect() // 断开websocket链接
+        func didConnect(chainId: Int?,accounts: [String]?) // 成功选择连接钱包
+        func didDisconnect() // 断开和钱包的连接，针对于disconnect
+    }
+```
+
+
+## 相关主动发起方法
 
 * connect
 
@@ -28,27 +39,24 @@ bitizenDapp：当前app的deeplink或者Universal Links，以便Bitizen产生相
 
 ```Swift
 
-    api.ethSign(message: "0x0123", account: walletAccount) {  [weak self] response in
-                self?.handleReponse(response, expecting: "Signature")
+    api.ethSign(message: "0x0123", account: walletAccount) {  response in
             }
 
 ```
 * Personal Sign
 ```Swift
-              api.personalSign(message: "Hi there!", account: walletAccount) {  [weak self] response in
-                self?.handleReponse(response, expecting: "Signature")
+              api.personalSign(message: "Hi there!", account: walletAccount) {  response in
             }
 ```
 * Sign typed date
 ```Swift
-    api.ethSignTypedData(message: Stub.typedData, account: walletAccount) {  [weak self] response in
-                self?.handleReponse(response, expecting: "Signature")
+    api.ethSignTypedData(message: Stub.typedData, account: walletAccount) { response in
             }
 ```
+
 * ETH send transaction
 ```Swift
-    api.ethSendTransaction(transaction: transaction) {  [weak self] response in
-                self?.handleReponse(response, expecting: "Hash")
+    api.ethSendTransaction(transaction: transaction) { response in
             }
     注意：这里的nonce直接传“0”就可以，APP端会根据重新获取所应该的nonce值
 ```
@@ -62,15 +70,6 @@ bitizenDapp：当前app的deeplink或者Universal Links，以便Bitizen产生相
 如果连接钱包成功并且没有断开连接，只是websocket断开的话，可以通过此方法进行重连
 
 
-## 代理方法回调
-    
-```Swift    
-    public protocol BitizenConnectDelegate {
-        func failedToConnect() // 断开websocket链接
-        func didConnect(chainId: Int?,accounts: [String]?) // 成功选择链接钱包
-        func didDisconnect() // 断开和钱包的连接
-    }
-```
     
     
 ---
