@@ -92,16 +92,6 @@ open class BitizenConnectApi: NSObject {
         }
     }
     
-    public func ethSign(message: String,account:String,result:@escaping (_ response: Response) -> ()) {
-        guard let url = session?.url else {
-            return
-        }
-        try? client?.eth_sign(url: url, account: account, message: message) {
-         response in
-            result(response)
-        }
-    }
-    
     public func ethSignTypedData(message: String,account:String,result:@escaping (_ response: Response) -> ()){
         guard let url = session?.url else {
             return
