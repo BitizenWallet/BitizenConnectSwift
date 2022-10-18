@@ -1,8 +1,15 @@
 # BitizenConnectSwift
 
+library to use BitizenConnect with Swift or Objective-C
+
+
 ## 相关配置
 
 需要给您的APP配置deeplink或者Universal Links，建议您直接配置Universal Links
+
+## 添加SDK依赖
+
+可以通过Swift Package Manager和CocoaPods导入SDK，对应git地址为 https://github.com/BitizenWallet/BitizenConnectSwift.git
 
 ## 接入
 ```Swift
@@ -15,11 +22,10 @@ let api  =  BitizenConnectApi(delegate: self)
 ```Swift    
     public protocol BitizenConnectDelegate {
         func failedToConnect() // 断开websocket链接
-        func didConnect(chainId: Int?,accounts: [String]?) // 成功选择连接钱包
+        func didConnect(chainId: Int?,accounts: [String]?) // 成功选择连接钱包,可能存在多个钱包地址
         func didDisconnect() // 断开和钱包的连接，针对于disconnect
     }
 ```
-
 
 ## 相关主动发起方法
 
@@ -44,6 +50,7 @@ bitizenDapp：当前app的deeplink或者Universal Links，以便Bitizen产生相
 
 ```
 * Personal Sign
+> eth_sign 是危险操作，会导致资金丢失，Bitizen Wallet 已经把 eth_sign 封禁
 ```Swift
               api.personalSign(message: "Hi there!", account: walletAccount) {  response in
             }
@@ -68,48 +75,3 @@ bitizenDapp：当前app的deeplink或者Universal Links，以便Bitizen产生相
 * reconnectIfNeeded
 
 如果连接钱包成功并且没有断开连接，只是websocket断开的话，可以通过此方法进行重连
-
-
-    
-    
----
-
-## Prerequisites
-
-- iOS 14.0
-- Swift 5
-
-## BitizenConnectSwift dependencies
-
-- CryptoSwift - for cryptography operations
-
-## Swift Package Manager
-
-In your `Package.swift`:
-
-    dependencies: [
-        .package(url: "https://github.com/BitizenWallet/BitizenConnectSwift.git", .upToNextMinor(from: "1.2.0"))
-    ]
-
-## CocoaPods
-
-In your `Podfile`:
-
-    platform :ios, '14.0'
-    use_frameworks!
-
-    target 'MyApp' do
-      pod 'BitizenConnectSwift', :git => 'https://github.com/BitizenWallet/BitizenConnectSwift.git', :branch => 'master'
-    end
-
-## Carthage
-
-In your `Cartfile`:
-
-    github "BitizenConnect/BitizenConnectSwift"
-
-Run `carthage update` to build the framework and drag the BitizenConnectSwift.framework in your Xcode project.
-
-# License
-
-MIT License (see the LICENSE file).
