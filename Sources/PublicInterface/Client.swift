@@ -24,6 +24,8 @@ public class Client: BitizenConnect {
     private(set) weak var delegate: ClientDelegate?
     private var commonDappInfo: Session.DAppInfo?
     private var responses: Responses
+    
+    public static var appStoreLink =  "https://apps.apple.com/us/app/bitizen-crypto-web3-wallet/id1598283542"
 
     public enum ClientError: Error {
         case missingWalletInfoInSession
@@ -46,7 +48,11 @@ public class Client: BitizenConnect {
     public func send(_ request: Request, completion: RequestResponse?, openWallet: Bool) throws {
         if (openWallet) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                UIApplication.shared.open(URL(string: "https://bitizen.org/wallet/wc")!, options: [.universalLinksOnly : true])
+                UIApplication.shared.open(URL(string: "https://bitizen.org/wallet/wc")!, options: [.universalLinksOnly : true]) { success in
+                    if (!success) {
+                        UIApplication.shared.open(URL(string: Client.appStoreLink)!)
+                    }
+                }
             }
         }
         guard let session = communicator.session(by: request.url) else {

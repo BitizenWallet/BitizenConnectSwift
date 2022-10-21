@@ -147,7 +147,11 @@ extension BitizenConnectApi: ClientDelegate {
             return
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIApplication.shared.open(uri, options: [:])
+            UIApplication.shared.open(uri, options: [.universalLinksOnly : true]) { success in
+                if (!success) {
+                    UIApplication.shared.open(URL(string: Client.appStoreLink)!)
+                }
+            }
         }
     }
 
